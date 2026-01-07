@@ -400,6 +400,10 @@ export default function MarkdownPractice() {
             {/* Mobile Toolbar - order-2 on mobile (middle), hidden on desktop */}
             <div className={`${cardClass} rounded-xl border px-2 py-2 overflow-x-auto order-2 md:hidden`}>
               <div className="flex items-center gap-1.5 min-w-max">
+                <button onClick={() => setMarkdown('')}
+                  className="px-3 py-1.5 text-sm font-medium rounded-md bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition-colors shadow-sm">清空</button>
+                <button onClick={() => setMarkdown(defaultMarkdown)}
+                  className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors shadow-sm ${darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>重置</button>
                 {syntaxButtons.map((btn, i) => (
                   <button key={i} onClick={() => insertSyntax(btn)} title={btn.desc}
                     className={`px-2.5 py-1.5 text-sm font-medium rounded-md transition-colors shadow-sm ${
@@ -410,10 +414,6 @@ export default function MarkdownPractice() {
                     {btn.label}
                   </button>
                 ))}
-                <button onClick={() => setMarkdown('')}
-                  className="px-3 py-1.5 text-sm font-medium rounded-md bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition-colors shadow-sm">清空</button>
-                <button onClick={() => setMarkdown(defaultMarkdown)}
-                  className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors shadow-sm ${darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>重置</button>
               </div>
             </div>
 
