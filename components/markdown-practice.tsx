@@ -389,7 +389,7 @@ export default function MarkdownPractice() {
           {/* Main Content */}
           <main className="flex-1 flex flex-col md:flex-row min-h-0 p-2 gap-2">
             {/* Editor */}
-            <div className={`flex-1 ${cardClass} rounded-xl border overflow-hidden flex flex-col order-2 md:order-1`}>
+            <div className={`h-24 md:h-auto md:flex-1 ${cardClass} rounded-xl border overflow-hidden flex flex-col order-2 md:order-1`}>
               <div className={`px-3 py-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-b ${darkMode ? 'border-gray-600' : 'border-gray-200'} flex-shrink-0 hidden md:block`}>
                 <span className={`text-sm font-medium ${subTextClass}`}>✏️ Markdown 输入</span>
               </div>
@@ -399,11 +399,11 @@ export default function MarkdownPractice() {
             </div>
 
             {/* Preview */}
-            <div className={`flex-1 ${cardClass} rounded-xl border overflow-hidden flex flex-col order-1 md:order-2`}>
+            <div className={`h-20 md:h-auto md:flex-1 ${cardClass} rounded-xl border overflow-hidden flex flex-col order-1 md:order-2`}>
               <div className={`px-3 py-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-b ${darkMode ? 'border-gray-600' : 'border-gray-200'} flex-shrink-0 hidden md:block`}>
                 <span className={`text-sm font-medium ${subTextClass}`}>👀 实时预览</span>
               </div>
-              <div className={`flex-1 p-4 overflow-y-auto select-none ${textClass}`}
+              <div className={`flex-1 p-3 md:p-4 overflow-y-auto select-none ${textClass}`}
                 dangerouslySetInnerHTML={{ __html: parseMarkdown(markdown) }}/>
             </div>
           </main>
