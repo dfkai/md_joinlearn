@@ -218,19 +218,19 @@ export default function MarkdownPractice() {
       {/* Header */}
       <header className={`${cardClass} border-b shadow-sm flex-shrink-0`}>
         <div className="px-4 py-2 flex items-center justify-between gap-2">
-          <h1 className={`text-lg font-bold ${textClass} whitespace-nowrap`}>📝 Markdown 练习器 <span className={`text-sm font-normal ${subTextClass}`}>| joinlearn.com 出品</span></h1>
-          <div className="flex items-center gap-2">
+          <h1 className={`text-base sm:text-lg font-bold ${textClass} whitespace-nowrap`}>📝 Markdown 练习器 <span className={`text-sm font-normal ${subTextClass} hidden sm:inline`}>| joinlearn.com 出品</span></h1>
+          <div className="flex items-center gap-1 sm:gap-2">
             <button onClick={() => setMode('practice')}
-              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors shadow-sm ${mode === 'practice' ? 'bg-indigo-600 text-white' : darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>
-              ✏️ 练习
+              className={`px-2 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors shadow-sm ${mode === 'practice' ? 'bg-indigo-600 text-white' : darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>
+              <span className="sm:hidden">✏️</span><span className="hidden sm:inline">✏️ 练习</span>
             </button>
             <button onClick={() => setMode('challenge')}
-              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors shadow-sm flex items-center gap-1.5 ${mode === 'challenge' ? 'bg-indigo-600 text-white' : darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>
-              🎮 挑战
-              {completed.size > 0 && <span className="bg-yellow-400 text-yellow-900 px-1.5 rounded-full text-xs font-semibold">{completed.size}/{challenges.length}</span>}
+              className={`px-2 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors shadow-sm flex items-center gap-1 sm:gap-1.5 ${mode === 'challenge' ? 'bg-indigo-600 text-white' : darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>
+              <span className="sm:hidden">🎮</span><span className="hidden sm:inline">🎮 挑战</span>
+              {completed.size > 0 && <span className="bg-yellow-400 text-yellow-900 px-1 sm:px-1.5 rounded-full text-xs font-semibold">{completed.size}/{challenges.length}</span>}
             </button>
             <button onClick={() => setDarkMode(!darkMode)}
-              className={`px-3 py-2 text-sm rounded-md transition-colors shadow-sm ${darkMode ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-300' : 'bg-gray-800 text-white hover:bg-gray-700'}`}>
+              className={`px-2 sm:px-3 py-2 text-sm rounded-md transition-colors shadow-sm ${darkMode ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-300' : 'bg-gray-800 text-white hover:bg-gray-700'}`}>
               {darkMode ? '☀️' : '🌙'}
             </button>
           </div>
@@ -363,8 +363,8 @@ export default function MarkdownPractice() {
         /* Practice Mode */
         <>
           {/* Toolbar */}
-          <div className={`${cardClass} border-b px-2 py-2 flex-shrink-0`}>
-            <div className="flex flex-wrap items-center gap-1.5">
+          <div className={`${cardClass} border-b px-2 py-2 flex-shrink-0 overflow-x-auto`}>
+            <div className="flex items-center gap-1.5 min-w-max">
               {syntaxButtons.map((btn, i) => (
                 <button key={i} onClick={() => insertSyntax(btn)} title={btn.desc}
                   className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors shadow-sm ${
