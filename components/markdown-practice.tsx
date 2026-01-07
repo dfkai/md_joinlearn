@@ -155,6 +155,22 @@ export default function MarkdownPractice() {
   const [showHint, setShowHint] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [stats, setStats] = useState({ chars: 0, words: 0, lines: 0 });
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  // 监听键盘弹出
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.visualViewport) {
+        const heightDiff = window.innerHeight - window.visualViewport.height;
+        setKeyboardHeight(heightDiff > 50 ? heightDiff : 0);
+      }
+    };
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleResize);
+      return () => window.visualViewport?.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   useEffect(() => {
     const chars = markdown.length;
@@ -387,7 +403,7 @@ export default function MarkdownPractice() {
           </div>
 
           {/* Main Content */}
-          <main className="flex-1 flex flex-col md:flex-row min-h-0 p-2 gap-2">
+          <main className="flex-1 flex flex-col md:flex-row min-h-0 p-2 pb-28 md:pb-2 gap-2">
             {/* Editor */}
             <div className={`h-24 md:h-auto md:flex-1 ${cardClass} rounded-xl border overflow-hidden flex flex-col order-2 md:order-1`}>
               <div className={`px-3 py-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-b ${darkMode ? 'border-gray-600' : 'border-gray-200'} flex-shrink-0 hidden md:block`}>
@@ -409,7 +425,9 @@ export default function MarkdownPractice() {
           </main>
 
           {/* Mobile Toolbar - below input, visible on mobile */}
-          <div className={`${cardClass} border-t px-2 py-2 flex-shrink-0 md:hidden`}>
+          <div
+            className={`${cardClass} border-t px-2 py-2 md:hidden fixed left-0 right-0 z-50 transition-all duration-150`}
+            style={{ bottom: `${keyboardHeight}px` }}>
             <div className="overflow-x-auto">
               <div className="flex items-center gap-1.5 min-w-max pb-2">
                 {syntaxButtons.map((btn, i) => (
