@@ -362,12 +362,12 @@ export default function MarkdownPractice() {
       ) : (
         /* Practice Mode */
         <>
-          {/* Toolbar - responsive for both desktop and mobile */}
-          <div className={`${cardClass} border-b px-2 py-2 flex-shrink-0 overflow-x-auto`}>
+          {/* Desktop Toolbar - hidden on mobile */}
+          <div className={`${cardClass} border-b px-2 py-2 flex-shrink-0 overflow-x-auto hidden md:block`}>
             <div className="flex items-center gap-1.5 min-w-max">
               {syntaxButtons.map((btn, i) => (
                 <button key={i} onClick={() => insertSyntax(btn)} title={btn.desc}
-                  className={`px-2.5 md:px-3 py-1.5 text-sm font-medium rounded-md transition-colors shadow-sm ${
+                  className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors shadow-sm ${
                     darkMode
                       ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600'
                       : 'bg-white hover:bg-gray-100 text-gray-700 border border-gray-200 hover:border-gray-300'
@@ -376,35 +376,55 @@ export default function MarkdownPractice() {
                 </button>
               ))}
               <div className="flex-1" />
-              <span className={`text-xs ${subTextClass} hidden md:inline`}>
+              <span className={`text-xs ${subTextClass}`}>
                 {stats.chars}字 · {stats.words}词 · {stats.lines}行
               </span>
               <button onClick={() => setMarkdown('')}
-                className="px-3 md:px-3 py-1.5 text-sm font-medium rounded-md bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition-colors shadow-sm">清空</button>
+                className="px-3 py-1.5 text-sm font-medium rounded-md bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition-colors shadow-sm">清空</button>
               <button onClick={() => setMarkdown(defaultMarkdown)}
-                className={`px-3 md:px-3 py-1.5 text-sm font-medium rounded-md transition-colors shadow-sm ${darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>重置</button>
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors shadow-sm ${darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>重置</button>
             </div>
           </div>
 
           {/* Main Content */}
           <main className="flex-1 flex flex-col md:flex-row min-h-0 p-2 gap-2">
-            {/* Editor */}
-            <div className={`flex-1 ${cardClass} rounded-xl border overflow-hidden flex flex-col order-2 md:order-1`}>
-              <div className={`px-3 py-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-b ${darkMode ? 'border-gray-600' : 'border-gray-200'} flex-shrink-0 hidden md:block`}>
-                <span className={`text-sm font-medium ${subTextClass}`}>✏️ Markdown 输入</span>
-              </div>
-              <textarea id="md-input" value={markdown} onChange={e => setMarkdown(e.target.value)} spellCheck={false}
-                className={`flex-1 p-3 resize-none focus:outline-none font-mono text-sm ${darkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-700'}`}
-                placeholder="在这里输入 Markdown 内容..."/>
-            </div>
-
-            {/* Preview */}
+            {/* Preview - order-1 on mobile (top), order-2 on desktop (right) */}
             <div className={`flex-1 ${cardClass} rounded-xl border overflow-hidden flex flex-col order-1 md:order-2`}>
               <div className={`px-3 py-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-b ${darkMode ? 'border-gray-600' : 'border-gray-200'} flex-shrink-0 hidden md:block`}>
                 <span className={`text-sm font-medium ${subTextClass}`}>👀 实时预览</span>
               </div>
               <div className={`flex-1 p-3 md:p-4 overflow-y-auto select-none ${textClass}`}
                 dangerouslySetInnerHTML={{ __html: parseMarkdown(markdown) }}/>
+            </div>
+
+            {/* Mobile Toolbar - order-2 on mobile (middle), hidden on desktop */}
+            <div className={`${cardClass} rounded-xl border px-2 py-2 overflow-x-auto order-2 md:hidden`}>
+              <div className="flex items-center gap-1.5 min-w-max">
+                {syntaxButtons.map((btn, i) => (
+                  <button key={i} onClick={() => insertSyntax(btn)} title={btn.desc}
+                    className={`px-2.5 py-1.5 text-sm font-medium rounded-md transition-colors shadow-sm ${
+                      darkMode
+                        ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600'
+                        : 'bg-white hover:bg-gray-100 text-gray-700 border border-gray-200 hover:border-gray-300'
+                    } ${btn.className || ''}`}>
+                    {btn.label}
+                  </button>
+                ))}
+                <button onClick={() => setMarkdown('')}
+                  className="px-3 py-1.5 text-sm font-medium rounded-md bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition-colors shadow-sm">清空</button>
+                <button onClick={() => setMarkdown(defaultMarkdown)}
+                  className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors shadow-sm ${darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>重置</button>
+              </div>
+            </div>
+
+            {/* Editor - order-3 on mobile (bottom), order-1 on desktop (left) */}
+            <div className={`flex-1 ${cardClass} rounded-xl border overflow-hidden flex flex-col order-3 md:order-1`}>
+              <div className={`px-3 py-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-b ${darkMode ? 'border-gray-600' : 'border-gray-200'} flex-shrink-0 hidden md:block`}>
+                <span className={`text-sm font-medium ${subTextClass}`}>✏️ Markdown 输入</span>
+              </div>
+              <textarea id="md-input" value={markdown} onChange={e => setMarkdown(e.target.value)} spellCheck={false}
+                className={`flex-1 p-3 resize-none focus:outline-none font-mono text-sm ${darkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-700'}`}
+                placeholder="在这里输入 Markdown 内容..."/>
             </div>
           </main>
         </>
