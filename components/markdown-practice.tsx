@@ -218,8 +218,17 @@ export default function MarkdownPractice() {
       {/* Header */}
       <header className={`${cardClass} border-b shadow-sm flex-shrink-0`}>
         <div className="px-4 py-2 flex items-center justify-between gap-2">
-          <h1 className={`text-base sm:text-lg font-bold ${textClass} whitespace-nowrap`}>📝 Markdown 练习器 <span className={`text-sm font-normal ${subTextClass} hidden sm:inline`}>| <a href="https://joinlearn.com" target="_blank" rel="noopener noreferrer" className="hover:underline">joinlearn.com</a> 出品</span></h1>
-          <a href="https://flowus.cn/4fbb9126-862c-42f5-8ff7-b39e0601272f" target="_blank" rel="noopener noreferrer" className={`text-xs sm:text-sm ${subTextClass} hover:underline hidden sm:inline`}>📚 课程地址</a>
+          <h1 className={`text-base sm:text-lg font-bold ${textClass} whitespace-nowrap`}>📝 Markdown 练习器</h1>
+          <div className="flex items-center gap-1 sm:gap-2">
+            <a href="https://joinlearn.com" target="_blank" rel="noopener noreferrer"
+              className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition-colors shadow-sm ${darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>
+              <span className="sm:hidden">🏠</span><span className="hidden sm:inline">🏠 前往「就学」官网</span>
+            </a>
+            <a href="https://flowus.cn/4fbb9126-862c-42f5-8ff7-b39e0601272f" target="_blank" rel="noopener noreferrer"
+              className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition-colors shadow-sm ${darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>
+              <span className="sm:hidden">📚</span><span className="hidden sm:inline">📚 相关课程地址</span>
+            </a>
+          </div>
           <div className="flex items-center gap-1 sm:gap-2">
             <button onClick={() => setMode('practice')}
               className={`px-2 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors shadow-sm ${mode === 'practice' ? 'bg-indigo-600 text-white' : darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600 border border-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>
